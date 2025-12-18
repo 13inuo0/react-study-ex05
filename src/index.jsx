@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { ComplexProps, ConditionalProps, DefaultProps, PropsExample } from "./PropsExample";
 import Card from "./Card";
+import { ModalEx } from "./components/ModalEx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -30,5 +31,6 @@ root.render(
         style={{ border: "2px solid blue", padding: "10px", borderRadius: "10px" }}
       />
     </div>
+    <ModalEx/>
   </>
 );
