@@ -52,3 +52,12 @@
 .btn-success:hover {
   background-color: #218838;
 }
+
+.modal-content-example {
+  line-height: 1.6;
+}
+
+.modal-content-example p {
+  margin-bottom: 16px;
+  color: #555;
+}
