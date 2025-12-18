@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "./Modal.css";
 
-export function Modal({ isOpen, title }) {
+export function Modal({ isOpen, title, onClose, children }) {
   useEffect(() => {
     if (isOpen) {
       // 현재 스크롤 위치 저장
@@ -22,12 +22,24 @@ export function Modal({ isOpen, title }) {
       };
     }
   }, [isOpen]);
+
+  if (!isOpen) return null;
+  const handleBgClose = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="modal-backdrop">
+    <div className="modal-backdrop" onClick={handleBgClose}>
       <div className="modal-content">
         <div className="modal-header">
           <h2 className="modal-title">{title}</h2>
-        </div>
+          <button className="modal-close-btn" onClick={onClose}>
+            X
+          </button>
+        </div>{" "}
+        <div className="modal-body">{children}</div>
       </div>
     </div>
   );
