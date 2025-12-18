@@ -6,6 +6,11 @@ export function ModalEx() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCofirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
   const openModal = () => setIsModalOpen(true);
   const openConfirmModal = () => setIsConfirmModalOpen(true);
@@ -13,10 +18,29 @@ export function ModalEx() {
   const openFormModal = () => setIsFormModalOpen(true);
   const closeFormModal = () => setIsFormModalOpen(false);
   const closeModal = () => setIsModalOpen(false);
+
   // 확인 모달
   const handleConfirm = () => {
     alert("확인 되었습니다.");
     closeConfirmModal();
+  };
+
+  //   폼 제출
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    alert(`폼 제출 완료 \n 이름 : ${formData.name} \n 이메일 : ${formData.email} \n 메세지 : ${formData.message}`);
+    setFormData({ name: "", email: "", message: "" });
+    closeFormModal()
+  };
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    // e.target.name 은 이벤트 발생한 요소의 name속성을 가르킴
+    // e.target.value 는 이벤트가 발생한 요소의 값 value 속서을 의미함.
+    setFormData((prev) => ({
+      ...prev, //이전 상태를 유지하면서 새로운 상태를 추가하는 기능
+      [name]: value, //속성 : 값 = 새로운 상태를 추가
+    }));
   };
 
   return (
@@ -81,20 +105,34 @@ export function ModalEx() {
         title="폼 모달"
         children={
           <>
-            <form className="modal-form">
+            <form onSubmit={handleFormSubmit} className="modal-form">
               <div className="form-group">
                 <label htmlFor="name">이름:</label>
-                <input type="text" id="name" name="name" required />
+                <input type="text" id="name" name="name" required value={formData.name} onChange={handleFormChange} />
               </div>
 
               <div className="form-group">
                 <label htmlFor="email">이메일:</label>
-                <input type="email" id="email" name="email" required />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleFormChange}
+                />
               </div>
 
               <div className="form-group">
                 <label htmlFor="message">메시지:</label>
-                <textarea id="message" name="message" rows="4" required />
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                  value={formData.message}
+                  onChange={handleFormChange}
+                />
               </div>
 
               <div className="modal-actions">

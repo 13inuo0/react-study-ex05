@@ -29,8 +29,9 @@ root.render(
           highlight={false}
           style={{ border: "2px solid blue", padding: "10px", borderRadius: "10px" }}
         />
-      </div>{" "}
+      </div>
     </div>
+
     <ModalEx />
   </>
 );
